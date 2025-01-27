@@ -9,6 +9,8 @@
 - **Admin Project Management**:
   - Post projects with GitHub repository integration.
   - Tag projects with required skills and difficulty levels.
+- **Projects Section**:
+  - Browse a curated list of projects integrated with GitHub with project descriptions, required skills and difficulty level.
 - **User Profiles**:
   - Showcase skills, GitHub contributions, and project involvement.
 - **Skill-Based Filtering**:
@@ -16,6 +18,8 @@
 - **Community Chat**:
   - Collaborate and discuss projects in real-time.
   - Suggest new project ideas or enhancements.
+- **ChatBot**:
+  - An AI-powered chatbot to solve coding queries, provide project guidance, suggest resources, and boost collaboration with real-time support.
 - **Save for Later**:
   - Bookmark interesting projects for quick access.
 - **Task Management**:
