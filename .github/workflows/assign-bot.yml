@@ -1,0 +1,33 @@
+name: Assign Bot
+
+on:
+  issue_comment:
+    types: [created]
+
+jobs:
+  assign:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+
+    steps:
+    - name: Assign the issue if comment is "bot/assign"
+      if: ${{ contains(toLowerCase(github.event.comment.body), 'bot/assign') }}
+      uses: actions-ecosystem/action-assign@v1
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        assignees: ${{ github.event.comment.user.login }}
+    
+    - name: Comment on failure
+      if: failure()
+      uses: actions/github-script@v6
+      with:
+        github-token: ${{secrets.GITHUB_TOKEN}}
+        script: |
+          github.rest.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.name,
+            body: 'Unable to assign the issue. This could be due to permissions or other issues.'
+          })
