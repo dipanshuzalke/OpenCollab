@@ -22,14 +22,6 @@
   - An AI-powered chatbot to solve coding queries, provide project guidance, suggest resources, and boost collaboration with real-time support.
 - **Save for Later**:
   - Bookmark interesting projects for quick access.
-- **Task Management**:
-  - Claim and work on individual tasks within projects.
-- **Gamification**:
-  - Earn badges and rewards for contributions.
-- **Notifications**:
-  - Stay updated on project activities and discussions.
-- **Analytics Dashboard**:
-  - Visualize your contributions and track project progress.
 
 ---
 
@@ -37,9 +29,8 @@
 - **Frontend**: React.js, Tailwind CSS
 - **Backend**: Node.js with Express
 - **Database**: MongoDB (or Firebase)
-- **Real-Time Communication**: Socket.IO or Pusher
-- **Authentication**: OAuth (GitHub)
-- **Deployment**: Vercel (frontend), Heroku/AWS (backend)
+- **Real-Time Communication**: Socket.IO 
+- **Authentication**: JWT, OAuth (GitHub)
 
 ---
 
@@ -119,9 +110,14 @@
 ---
 
 ## **Future Enhancements**  
-- AI-based project recommendations.  
-- Integration with additional Git hosting services (e.g., GitLab).  
-- Multilingual support for global accessibility.  
+- **Task Management**:
+  - Claim and work on individual tasks within projects.
+- **Gamification**:
+  - Earn badges and rewards for contributions.
+- **Notifications**:
+  - Stay updated on project activities and discussions.
+- **Analytics Dashboard**:
+  - Visualize your contributions and track project progress. 
 
 ---
 
