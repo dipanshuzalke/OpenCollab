@@ -1,7 +1,7 @@
 # **OpenCollab**
 
 ## **Overview**
-**OpenCollab** is a platform designed to bring developers together to collaborate on open-source projects. It allows admins to post unique projects hosted on GitHub, enabling users to contribute based on their skills and interests. With features like skill-based filtering, community chat, and user profiles, **OpenCollab** simplifies collaboration and fosters a vibrant community of developers.
+**OpenCollab** is a platform designed to bring developers together to collaborate on open-source projects. Here, admin will post unique projects hosted on GitHub, enabling users to contribute based on their skills and interests. With features like skill-based filtering, community chat, and ChatBot, **OpenCollab** simplifies collaboration and fosters a vibrant community of developers.
 
 ---
 
