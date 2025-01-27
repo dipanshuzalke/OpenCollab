@@ -123,9 +123,7 @@
 
 ## **Community**  
 Join our growing community on:  
-- **Discord**: [Join Now](https://discord.gg/example)  
-- **Twitter**: [Follow Us](https://twitter.com/example)  
-- **GitHub Discussions**: [Discuss Ideas](https://github.com/example/OpenCollab/discussions)  
+- **Whatsapp**: [Join Now](https://chat.whatsapp.com/CyNB3c9OFQpJ1HlQHgJb9r)    
 
 ---
 
