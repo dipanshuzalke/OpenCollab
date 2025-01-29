@@ -117,13 +117,7 @@
 - **Notifications**:
   - Stay updated on project activities and discussions.
 - **Analytics Dashboard**:
-  - Visualize your contributions and track project progress. 
-
----
-
-## **Community**  
-Join our growing community on:  
-- **Whatsapp**: [Join Now](https://chat.whatsapp.com/CyNB3c9OFQpJ1HlQHgJb9r)    
+  - Visualize your contributions and track project progress.   
 
 ---
 
