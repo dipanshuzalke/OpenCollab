@@ -1,9 +1,12 @@
-const express = require("express");
+const express = require('express')
 const connectDB = require('./config/db')
 
-const app = express();
+const { userRouter } = require('./routes/userRoute')
 
-app.use()
+const app = express()
+
+app.use(express.json())
+app.use('/api/user', userRouter)
 
 connectDB()
   .then(() => {
@@ -13,6 +16,5 @@ connectDB()
     })
   })
   .catch(error => {
-    console.error('Error in connecting Database')
+    console.error('Error in connecting Database' + error)
   })
-
