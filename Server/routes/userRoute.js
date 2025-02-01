@@ -8,7 +8,7 @@ const userRouter = Router()
 
 // Existing routes
 userRouter.post('/signup', signupController)
-userRouter.post('/signin', loginController)
+userRouter.post('/login', loginController)
 
 // Admin routes
 userRouter.get('/admin/users', adminAuth, getAllUsers)
