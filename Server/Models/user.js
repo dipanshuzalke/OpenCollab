@@ -44,6 +44,10 @@ const userSchema = new Schema({
     // savedProjects : {
 
     // },
+    isAdmin: {
+        type: Boolean,
+        default: false
+    }
 },{
     timestamps: true
   })

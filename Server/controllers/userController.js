@@ -1,4 +1,5 @@
 const userModel = require('../Models/user')
+// const { users } = require('../config/mockData') till the time database id not accessed
 const jwt = require('jsonwebtoken')
 const JWT_USER_PASSWORD = 'dipanshu@123'
 
@@ -36,26 +37,23 @@ module.exports.loginController = async function (req, res) {
   })
 
   if (!user) {
-    res.status(403).json({
+    return res.status(403).json({
       message: 'User does not exist in our db'
     })
   }
 
-  if (user) {
-    const token = jwt.sign(
-      {
-        id: user._id
-      },
-      JWT_USER_PASSWORD
-    )
+  const token = jwt.sign(
+    {
+      id: user._id
+    },
+    JWT_USER_PASSWORD
+  )
 
-    res.json({
-      token: token,
-      message: 'You are signed in'
-    })
-  } else {
-    res.status(403).json({
-      message: 'Incorrect credentials'
-    })
-  }
+  res.json({
+    token: token,
+    message: 'You are signed in',
+    isAdmin: user.isAdmin
+  })
 }
+
+//else part is removed because !user already exist
