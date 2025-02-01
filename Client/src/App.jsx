@@ -3,15 +3,33 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from './components/auth/Login';
 import Signup from './components/auth/Signup';
 import AdminDashboard from './components/admin/AdminDashboard';
+import HomePage from './components/HomePage';
+import UserDashboard from './components/dashboard/UserDashboard';
+import ProtectedRoute from './components/auth/ProtectedRoute';
 
 function App() {
   return (
-    
     <Router>
       <Routes>
+        <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/admin" element={<AdminDashboard />} />
+        <Route 
+          path="/admin" 
+          element={
+            <ProtectedRoute>
+              <AdminDashboard />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/dashboard" 
+          element={
+            <ProtectedRoute>
+              <UserDashboard />
+            </ProtectedRoute>
+          } 
+        />
       </Routes>
     </Router>
   )

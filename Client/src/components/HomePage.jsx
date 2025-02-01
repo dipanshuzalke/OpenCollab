@@ -1,37 +1,59 @@
 import React from "react";
+import { useNavigate } from 'react-router-dom';
 
 const HomePage = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="relative h-screen bg-black text-white flex flex-col">
       {/* Navbar */}
       <nav className="flex justify-between items-center p-6">
         <div className="text-2xl font-bold">OpenCollab</div>
         <div>
-        <ul className="flex items-center space-x-6 text-lg">
-          <li className="hover:text-gray-400 cursor-pointer">Home</li>
-          <li className="hover:text-gray-400 cursor-pointer">Projects</li>
-          <li className="hover:text-gray-400 cursor-pointer">ChatBot</li>
-          <li className="hover:text-gray-400 cursor-pointer">Community Chat</li>
-          <li className="hover:text-gray-400 cursor-pointer">Contact Us</li>
-          <button className="px-4 py-2 bg-gray-800 rounded-lg hover:bg-gray-700">
-          Signup
-        </button>
-        <button className="px-4 py-2 bg-gray-800 rounded-lg hover:bg-gray-700">
-          Log in
-        </button>
-
-        </ul>
+          <ul className="flex items-center space-x-6 text-lg">
+            <li className="hover:text-gray-400 cursor-pointer">Home</li>
+            <li className="hover:text-gray-400 cursor-pointer">Projects</li>
+            <li className="hover:text-gray-400 cursor-pointer">ChatBot</li>
+            <li className="hover:text-gray-400 cursor-pointer">Community Chat</li>
+            <li className="hover:text-gray-400 cursor-pointer">Contact Us</li>
+            <button 
+              onClick={() => navigate('/signup')}
+              className="px-4 py-2 bg-gray-800 rounded-lg hover:bg-gray-700"
+            >
+              Signup
+            </button>
+            <button 
+              onClick={() => navigate('/login')}
+              className="px-4 py-2 bg-gray-800 rounded-lg hover:bg-gray-700"
+            >
+              Log in
+            </button>
+          </ul>
         </div>
       </nav>
 
       {/* Hero Section */}
       <div className="flex flex-col items-center justify-center flex-1 text-center px-4">
-        <h1 className=" text-6xl font-bold mb-4">Build, Innovate & Grow
-        </h1>
+        <h1 className="text-6xl font-bold mb-4">Build, Innovate & Grow</h1>
         <h1 className="text-6xl font-bold mb-4">with Open Collaboration</h1>
         <p className="text-xl mb-2 text-gray-300">
-        Join a global community of developers, contribute to meaningful projects, and turn ideas into reality.
+          Join a global community of developers, contribute to meaningful projects, and turn ideas into reality.
         </p>
+
+        {/* Call to Action Buttons */}
+        <div className="flex gap-4 mt-8">
+          <button 
+            onClick={() => navigate('/signup')}
+            className="px-8 py-3 bg-blue-600 rounded-lg hover:bg-blue-700 text-lg font-semibold"
+          >
+            Get Started
+          </button>
+          <button 
+            className="px-8 py-3 bg-gray-800 rounded-lg hover:bg-gray-700 text-lg font-semibold"
+          >
+            Learn More
+          </button>
+        </div>
 
         {/* Scroll Down Icon */}
         <div className="mt-10 animate-bounce">
