@@ -12,7 +12,7 @@ app.use(cors({
 }))
 
 app.use(express.json())
-app.use('', userRouter)
+app.use('/api/user', userRouter)
 
 connectDB()
   .then(() => {
@@ -24,3 +24,6 @@ connectDB()
   .catch(error => {
     console.error('Error in connecting Database:' + error)
   })
+
+
+
