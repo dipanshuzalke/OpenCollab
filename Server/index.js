@@ -1,12 +1,18 @@
 const express = require('express')
 const connectDB = require('./config/db')
+const cors = require('cors')
 
 const { userRouter } = require('./routes/userRoute')
 
 const app = express()
 
+app.use(cors({
+  origin: 'http://localhost:5173', // Vite's default port
+  credentials: true
+}))
+
 app.use(express.json())
-app.use('/api/user', userRouter)
+app.use('', userRouter)
 
 connectDB()
   .then(() => {
@@ -16,5 +22,5 @@ connectDB()
     })
   })
   .catch(error => {
-    console.error('Error in connecting Database' + error)
+    console.error('Error in connecting Database:' + error)
   })
