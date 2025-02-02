@@ -21,13 +21,13 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`${import.meta.env.VITE_API_URL}/login`, formData);
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/user/login`, formData);
       localStorage.setItem('token', response.data.token);
       
       if (response.data.isAdmin) {
         navigate('/admin');
       } else {
-        navigate('/');
+        navigate('/dashboard');
       }
     } catch (error) {
       setError(error.response?.data?.message || 'Login failed. Please try again.');
