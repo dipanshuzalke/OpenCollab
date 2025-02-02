@@ -21,11 +21,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-<<<<<<< HEAD
-      const response = await axios.post('http://localhost:3000/api/user/login', formData);
-=======
-      const response = await axios.post(`${import.meta.env.VITE_API_URL}/signin`, formData);
->>>>>>> frontend
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/login`, formData);
       localStorage.setItem('token', response.data.token);
       
       if (response.data.isAdmin) {
