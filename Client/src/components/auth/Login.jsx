@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { TextField, Button, Box, Typography, Container } from '@mui/material';
+import { TextField, Button, Box, Typography, Container, Alert } from '@mui/material';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
@@ -8,6 +8,7 @@ const Login = () => {
     emailId: '',
     password: ''
   });
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -20,15 +21,20 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+<<<<<<< HEAD
       const response = await axios.post('http://localhost:3000/api/user/login', formData);
+=======
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/signin`, formData);
+>>>>>>> frontend
       localStorage.setItem('token', response.data.token);
+      
       if (response.data.isAdmin) {
         navigate('/admin');
       } else {
         navigate('/');
       }
     } catch (error) {
-      console.error('Login failed:', error);
+      setError(error.response?.data?.message || 'Login failed. Please try again.');
     }
   };
 
@@ -45,6 +51,11 @@ const Login = () => {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
+        {error && (
+          <Alert severity="error" sx={{ width: '100%', mt: 2 }}>
+            {error}
+          </Alert>
+        )}
         <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
           <TextField
             margin="normal"

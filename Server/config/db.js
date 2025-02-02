@@ -6,4 +6,5 @@ const connectDB = async () => {
   )
 }
 
+mongoose.set('debug',true);
 module.exports = connectDB;
