@@ -82,6 +82,7 @@ app.use(cors({
 
 app.use(express.json())
 
+
 // GitHub auth routes
 app.get('/auth/github',
   passport.authenticate('github', { 
@@ -120,6 +121,9 @@ app.get('/auth/logout', (req, res) => {
 
 app.use('', userRouter)
 
+app.use('/api/user', userRouter)
+
+
 connectDB()
   .then(() => {
     console.log('Database connection successful')
@@ -132,8 +136,11 @@ connectDB()
   })
 
 
+
 //To test this:
 // Create a new GitHub OAuth app at https://github.com/settings/developers
 // Set the Authorization callback URL to http://localhost:3000/auth/github/callback
 // Replace the GITHUB_CLIENT_ID and GITHUB_CLIENT_SECRET with your actual values
 // Start your server and try accessing /auth/github endpoint
+
+

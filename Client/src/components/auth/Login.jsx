@@ -32,7 +32,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`${import.meta.env.VITE_API_URL}/signin`, formData);
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/user/login`, formData);
       localStorage.setItem('token', response.data.token);
       
       if (response.data.isAdmin) {
