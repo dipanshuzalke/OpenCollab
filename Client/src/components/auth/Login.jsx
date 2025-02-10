@@ -1,7 +1,8 @@
-import { useState } from 'react';
-import { TextField, Button, Box, Typography, Container, Alert } from '@mui/material';
+import { useState, useEffect } from 'react';
+import { TextField, Button, Box, Typography, Container, Alert, Divider } from '@mui/material';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import GitHubIcon from '@mui/icons-material/GitHub';
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -10,6 +11,16 @@ const Login = () => {
   });
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+
+  // Check for token in URL params (from GitHub callback)
+  useEffect(() => {
+    const token = searchParams.get('token');
+    if (token) {
+      localStorage.setItem('token', token);
+      navigate('/dashboard');
+    }
+  }, [searchParams, navigate]);
 
   const handleChange = (e) => {
     setFormData({
@@ -34,6 +45,10 @@ const Login = () => {
     }
   };
 
+  const handleGitHubLogin = () => {
+    window.location.href = 'http://localhost:3000/auth/github';
+  };
+
   return (
     <Container component="main" maxWidth="xs">
       <Box
@@ -52,7 +67,7 @@ const Login = () => {
             {error}
           </Alert>
         )}
-        <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
+        <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1, width: '100%' }}>
           <TextField
             margin="normal"
             required
@@ -84,6 +99,18 @@ const Login = () => {
             sx={{ mt: 3, mb: 2 }}
           >
             Sign In
+          </Button>
+          
+          <Divider sx={{ my: 2 }}>OR</Divider>
+          
+          <Button
+            fullWidth
+            variant="outlined"
+            startIcon={<GitHubIcon />}
+            onClick={handleGitHubLogin}
+            sx={{ mt: 1, mb: 2 }}
+          >
+            Continue with GitHub
           </Button>
         </Box>
       </Box>
