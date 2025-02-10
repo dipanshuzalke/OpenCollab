@@ -41,6 +41,8 @@ const AdminDashboard = () => {
         { isAdmin: !currentIsAdmin },
         { headers: { Authorization: `Bearer ${token}` } }
       );
+      // Optionally log the response to check if it's correct
+    console.log('Response:', userId);
       fetchUsers();
     } catch (error) {
       console.error('Error updating user role:', error);

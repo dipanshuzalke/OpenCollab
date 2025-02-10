@@ -25,9 +25,9 @@ const Login = () => {
       localStorage.setItem('token', response.data.token);
       
       if (response.data.isAdmin) {
-        navigate('/admin');
+        navigate('/admin/users');
       } else {
-        navigate('/dashboard');
+        navigate('/');
       }
     } catch (error) {
       setError(error.response?.data?.message || 'Login failed. Please try again.');

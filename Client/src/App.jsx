@@ -6,6 +6,7 @@ import HomePage from './components/HomePage';
 import AdminDashboard from './components/admin/AdminDashboard';
 import UserDashboard from './components/dashboard/UserDashboard';
 import ProtectedRoute from './components/auth/ProtectedRoute';
+import AdminDashboardPage from './components/dashboard/AdminDashboardPage';
 
 function App() {
   return (
@@ -15,7 +16,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route 
-          path="/admin" 
+          path="/admin/users" 
           element={
             <ProtectedRoute>
               <AdminDashboard />
@@ -23,10 +24,10 @@ function App() {
           } 
         />
         <Route 
-          path="/dashboard" 
+          path="/admin/dashboard" 
           element={
             <ProtectedRoute>
-              <UserDashboard />
+              <AdminDashboardPage />
             </ProtectedRoute>
           } 
         />
