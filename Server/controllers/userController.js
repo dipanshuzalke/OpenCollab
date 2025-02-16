@@ -3,69 +3,54 @@ const userModel = require('../Models/user')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const JWT_USER_PASSWORD = 'dipanshu@123'
+const User = require('../Models/user')
+const Mentor = require('../Models/mentor')
+const Professional = require('../Models/professional')
 
 module.exports.signupController = async function (req, res) {
+  const { role } = req.params
+  const { name, emailId, password, skills, githubProfile, organization } =
+    req.body
 
-    const { name, emailId, password, skills, profileImage, githubProfile } =
-      req.body
-  
-    try {
-      // Hash password before saving
-      const hashedPassword = await bcrypt.hash(password, 10)
+  const hashedPassword = await bcrypt.hash(password, 10)
 
-      await userModel.create({
+  try {
+    if (role === 'student') {
+      const newStudent = new User({
         name,
         emailId,
         password: hashedPassword,
         skills,
-        profileImage,
         githubProfile
       })
-    } catch (error) {
-      console.log(error)
-      res.json({
-        message: 'Error in signup'
+      await newStudent.save()
+    } else if (role === 'mentor') {
+      const newMentor = new Mentor({ name, emailId, password: hashedPassword })
+      await newMentor.save()
+    } else if (role === 'professional') {
+      const newProfessional = new Professional({
+        name,
+        emailId,
+        password: hashedPassword,
+        organization
       })
+      await newProfessional.save()
+    } else {
+      return res.status(400).json({ message: 'Invalid role' })
     }
 
-  const { name, emailId, password, skills, profileImage, githubProfile } =
-    req.body
-
-  try {
-    const hashedPassword = await bcrypt.hash(password, 5)
-
-    await userModel.create({
-      name,
-      emailId,
-      password: hashedPassword,
-      skills,
-      profileImage,
-      githubProfile
-    })
+    res.status(201).json({ message: `${role} registered successfully!` })
   } catch (error) {
-    console.log(error)
-
-    res.json({
-      message: 'Error in signup'
-    })
+    res.status(500).json({ message: 'Error registering user' })
   }
-
-  res.json({
-    message: 'signup succeded'
-  })
 }
 
 module.exports.loginController = async function (req, res) {
   const { emailId, password } = req.body
 
-
-  // First find user by email only
-  const user = await userModel.findOne({ emailId })
-
   const user = await userModel.findOne({
     emailId: emailId
   })
-
 
   if (!user) {
     return res.status(403).json({
@@ -73,10 +58,9 @@ module.exports.loginController = async function (req, res) {
     })
   }
 
-
   // Compare password with hashed password
   const isPasswordValid = await bcrypt.compare(password, user.password)
-  
+
   if (!isPasswordValid) {
     return res.status(403).json({
       message: 'Invalid credentials'
@@ -91,7 +75,6 @@ module.exports.loginController = async function (req, res) {
   )
 
   const passwordMatch = await bcrypt.compare(password, user.password)
-
 
   if (passwordMatch) {
     const token = jwt.sign(

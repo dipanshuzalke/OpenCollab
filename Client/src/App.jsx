@@ -7,6 +7,7 @@ import AdminDashboard from './components/admin/AdminDashboard';
 import UserDashboard from './components/dashboard/UserDashboard';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import AdminDashboardPage from './components/dashboard/AdminDashboardPage';
+import RoleSelection from './components/auth/RoleSelection'
 
 function App() {
   return (
@@ -14,7 +15,9 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
+        <Route path="/register" element={<RoleSelection />} />
+        <Route path="/register/:role" element={<Signup />} />
+
         <Route 
           path="/admin/users" 
           element={

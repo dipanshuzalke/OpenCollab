@@ -8,16 +8,16 @@ const HomePage = () => {
     <div className="relative h-screen bg-black text-white flex flex-col">
       {/* Navbar */}
       <nav className="flex justify-between items-center p-6">
-        <div className="text-2xl font-bold">OpenCollab</div>
+        <div className="text-2xl font-bold">IdeaNest</div>
         <div>
           <ul className="flex items-center space-x-6 text-lg">
-            <li className="hover:text-gray-400 cursor-pointer">Home</li>
+            <li className="hover:text-gray-400 cursor-pointer">Events</li>
+            <li className="hover:text-gray-400 cursor-pointer">Ideas</li>
             <li className="hover:text-gray-400 cursor-pointer">Projects</li>
-            <li className="hover:text-gray-400 cursor-pointer">ChatBot</li>
             <li className="hover:text-gray-400 cursor-pointer">Community Chat</li>
             <li className="hover:text-gray-400 cursor-pointer">Contact Us</li>
             <button 
-              onClick={() => navigate('/signup')}
+              onClick={() => navigate('/register')}
               className="px-4 py-2 bg-gray-800 rounded-lg hover:bg-gray-700"
             >
               Signup
@@ -34,16 +34,16 @@ const HomePage = () => {
 
       {/* Hero Section */}
       <div className="flex flex-col items-center justify-center flex-1 text-center px-4">
-        <h1 className="text-6xl font-bold mb-4">Build, Innovate & Grow</h1>
-        <h1 className="text-6xl font-bold mb-4">with Open Collaboration</h1>
+        <h1 className="text-6xl font-bold mb-4">Turn Ideas to Reality</h1>
+        <h1 className="text-5xl font-bold mb-4">Your journey of innovation starts here.</h1>
         <p className="text-xl mb-2 text-gray-300">
-          Join a global community of developers, contribute to meaningful projects, and turn ideas into reality.
+        Join a vibrant community of innovators, collaborate on impactful projects, and shape the future with your creativity.
         </p>
 
         {/* Call to Action Buttons */}
         <div className="flex gap-4 mt-8">
           <button 
-            onClick={() => navigate('/signup')}
+            onClick={() => navigate('/register')}
             className="px-8 py-3 bg-blue-600 rounded-lg hover:bg-blue-700 text-lg font-semibold"
           >
             Get Started

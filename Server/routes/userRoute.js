@@ -7,7 +7,7 @@ const adminAuth = require('../middleware/adminAuth');
 const userRouter = Router()
 
 // Existing routes
-userRouter.post('/signup', signupController)
+userRouter.post('/register/:role', signupController)
 userRouter.post('/login', loginController)
 
 // Admin routes
