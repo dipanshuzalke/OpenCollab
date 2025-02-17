@@ -9,26 +9,30 @@ const RoleSelection = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen">
-      <h1 className="text-2xl font-bold mb-4">Are you a Student or a Mentor?</h1>
-      <button
-        className="bg-blue-500 text-white px-6 py-3 rounded-lg m-2"
-        onClick={() => handleRoleSelect("student")}
-      >
-        Student
-      </button>
-      <button
-        className="bg-green-500 text-white px-6 py-3 rounded-lg m-2"
-        onClick={() => handleRoleSelect("mentor")}
-      >
-        Mentor
-      </button>
-      <button
-        className="bg-yellow-500 text-white px-6 py-3 rounded-lg m-2"
-        onClick={() => handleRoleSelect("professional")}
-      >
-        Professional
-      </button>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-blue-200 via-indigo-200 to-purple-300">
+      <h1 className="text-4xl font-extrabold text-gray-800 mb-8 animate__animated animate__fadeIn">
+        Choose Your Role
+      </h1>
+      <div className="space-y-4 flex flex-col gap-3">
+        <button
+          className="bg-blue-600 text-white px-8 py-4 rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300 ease-in-out"
+          onClick={() => handleRoleSelect("student")}
+        >
+          Student
+        </button>
+        <button
+          className="bg-green-600 text-white px-8 py-4 rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300 ease-in-out"
+          onClick={() => handleRoleSelect("mentor")}
+        >
+          Mentor
+        </button>
+        <button
+          className="bg-yellow-600 text-white px-8 py-4 rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300 ease-in-out"
+          onClick={() => handleRoleSelect("professional")}
+        >
+          Professional
+        </button>
+      </div>
     </div>
   );
 };

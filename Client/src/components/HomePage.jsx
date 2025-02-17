@@ -1,20 +1,28 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { FaUser, FaHome, FaCog, FaUserCircle } from "react-icons/fa";
+import { FaUser, FaHome, FaCog, FaUserCircle, FaSearch } from "react-icons/fa";
+import { MdChat, MdOutlineCreateNewFolder } from "react-icons/md";
 
 const Sidebar = () => {
   return (
     <div className="bg-black text-white h-screen w-1/5 p-5 flex flex-col gap-4">
-      <h2 className="text-2xl font-bold">IdeaNest</h2>
-      <nav className="flex flex-col gap-4">
+      <h2 className="text-3xl font-bold ml-20">IdeaNest</h2>
+      <hr />
+      <nav className="flex text-xl flex-col gap-6 items-center">
         <a href="#" className="flex items-center gap-2 hover:text-gray-400">
           <FaHome /> Home
         </a>
-        <a href="#" className="flex items-center gap-2 hover:text-gray-400">
-          <FaUser /> Profile
+        <a href="/events" className="flex items-center gap-2 hover:text-gray-400">
+          <FaUser /> Events
         </a>
         <a href="#" className="flex items-center gap-2 hover:text-gray-400">
-          <FaCog /> Settings
+        <MdOutlineCreateNewFolder /> Create Idea
+        </a>
+        <Link to="/community-chat" className=" flex items-center gap-2 hover:text-gray-400 cursor-pointer">
+          <MdChat /> Community Chat
+        </Link>
+        <a href="#" className="flex items-center gap-2 hover:text-gray-400">
+        <FaSearch /> Search
         </a>
         <a href="#" className="flex items-center gap-2 hover:text-gray-400">
           <FaUserCircle /> Account
@@ -24,38 +32,7 @@ const Sidebar = () => {
   );
 };
 
-const Navbar = () => {
-  const navigate = useNavigate();
-  
-  return (
-    <nav className="flex justify-between items-center p-6 bg-gray-900 text-white">
-      <div className="text-2xl font-bold">IdeaNest</div>
-      <ul className="flex items-center space-x-6 text-lg">
-        <li className="hover:text-gray-400 cursor-pointer">Events</li>
-        <li className="hover:text-gray-400 cursor-pointer">Ideas</li>
-        <li className="hover:text-gray-400 cursor-pointer">Projects</li>
-        <Link to="/community-chat" className="hover:text-gray-400 cursor-pointer">
-          Community Chat
-        </Link>
-        <li className="hover:text-gray-400 cursor-pointer">Contact Us</li>
-        <button 
-          onClick={() => navigate("/register")}
-          className="px-4 py-2 bg-gray-800 rounded-lg hover:bg-gray-700"
-        >
-          Signup
-        </button>
-        <button 
-          onClick={() => navigate("/login")}
-          className="px-4 py-2 bg-gray-800 rounded-lg hover:bg-gray-700"
-        >
-          Log in
-        </button>
-      </ul>
-    </nav>
-  );
-};
-
-const ProfileCard = () => {
+const Events = () => {
   return (
     <div className="bg-gray-900 text-white p-6 rounded-xl shadow-lg w-full flex justify-between items-center">
       <div>
@@ -81,7 +58,6 @@ const HomePage = () => {
     <div className="flex bg-gray-800 min-h-screen">
       <Sidebar />
       <div className="flex-1 flex flex-col">
-        <Navbar />
         <main className="p-10 flex-1 flex flex-col gap-6">
           <div className="bg-gray-900 text-white p-4 rounded-lg shadow-md flex items-center gap-4">
             <div className="w-12 h-12 bg-gray-600 rounded-full"></div>
@@ -91,7 +67,7 @@ const HomePage = () => {
             </div>
           </div>
           <h1 className="text-white text-3xl font-bold">Welcome to Your Dashboard</h1>
-          <ProfileCard />
+          <Events />
         </main>
       </div>
     </div>

@@ -26,7 +26,7 @@ const LandingPage = () => {
           <a href='#' className='hover:text-gray-400'>
             Ideas
           </a>
-          <a href='#' className='hover:text-gray-400'>
+          <a href='/community-chat' className='hover:text-gray-400'>
             Community
           </a>
           <a href='#' className='hover:text-gray-400'>
@@ -53,8 +53,8 @@ const LandingPage = () => {
 
       {/* Hero Section */}
       <section className='pt-10 pr-10 pl-10 flex flex-col md:flex-row justify-between'>
-        <div className='pt-30'>
-          <h1 className='text-2xl md:text-7xl font-bold max-w-md'>
+        <div className='pt-30 ml-10'>
+          <h1 className='text-3xl md:text-7xl font-bold max-w-md font-poppins'>
             Make your imagination a reality
           </h1>
           <div className='mt-6 flex space-x-4'>
@@ -67,7 +67,7 @@ const LandingPage = () => {
           </div>
         </div>
 
-        <div className='grid gap-6'>
+        <div className='grid gap-6 mr-10'>
           <div className='bg-[#E0D492] pl-20 pr-20 rounded-lg text-black flex justify-between items-center ml-10'>
             <img
               src={CollaborateIcon}
