@@ -8,7 +8,6 @@ import UserDashboard from './components/dashboard/UserDashboard';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import AdminDashboardPage from './components/dashboard/AdminDashboardPage';
 import RoleSelection from './components/auth/RoleSelection'
-import CommunityPage from './components/Communitypage.jsx'
 
 function App() {
   return (
@@ -18,7 +17,6 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<RoleSelection />} />
         <Route path="/register/:role" element={<Signup />} />
-        <Route path="/community-chat/" element={<CommunityPage />} />
 
         <Route 
           path="/admin/users" 

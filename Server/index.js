@@ -1,50 +1,46 @@
-const express = require('express');
-const session = require('express-session'); 
-const passport = require('passport'); 
-const GitHubStrategy = require('passport-github2').Strategy; 
-const connectDB = require('./config/db');
-const cors = require('cors');
-const userModel = require('./Models/user');
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
+const express = require('express')
+const session = require('express-session'); // to store user session
+const passport = require('passport'); // to authenticate user
+const GitHubStrategy = require('passport-github2').Strategy; // to authenticate user
+const connectDB = require('./config/db')
+const cors = require('cors')
+const userModel = require('./Models/user')
+const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
 
-const http = require('http');
-const { Server } = require('socket.io');
+const { userRouter } = require('./routes/userRoute')
 
-const ChatMessage = require('./Models/chatMessage');
-const { userRouter } = require('./routes/userRoute');
+const app = express()
 
-const app = express();
-
-// Configuration with hardcoded values (for dev only)
-const GITHUB_CLIENT_ID = '4b1018f34e5bed6d7ed1'; 
-const GITHUB_CLIENT_SECRET = '1f7e9d23e4e8b85e9f3c3f5e8b4d7c6a9b8c7d6e'; 
-const SESSION_SECRET = 'your-super-secret-session-key-123';
+// Configuration with hardcoded values (for development only - not recommended for production)
+const GITHUB_CLIENT_ID = '4b1018f34e5bed6d7ed1' // process.env.GITHUB_CLIENT_ID
+const GITHUB_CLIENT_SECRET = '1f7e9d23e4e8b85e9f3c3f5e8b4d7c6a9b8c7d6e' // process.env.GITHUB_CLIENT_SECRET
+const SESSION_SECRET = 'your-super-secret-session-key-123' // process.env.SESSION_SECRET
 
 // Session middleware
 app.use(session({
   secret: SESSION_SECRET,
   resave: false,
   saveUninitialized: false
-}));
+}))
 
 // Initialize passport
-app.use(passport.initialize());
-app.use(passport.session());
+app.use(passport.initialize())
+app.use(passport.session())
 
 // Passport serialization
 passport.serializeUser((user, done) => {
-  done(null, user.id);
-});
+  done(null, user.id)
+})
 
 passport.deserializeUser(async (id, done) => {
   try {
-    const user = await userModel.findById(id);
-    done(null, user);
+    const user = await userModel.findById(id)
+    done(null, user)
   } catch (err) {
-    done(err, null);
+    done(err, null)
   }
-});
+})
 
 // GitHub Strategy
 passport.use(new GitHubStrategy({
@@ -86,6 +82,7 @@ app.use(cors({
 
 app.use(express.json())
 
+
 // GitHub auth routes
 app.get('/auth/github',
   passport.authenticate('github', { 
@@ -118,73 +115,32 @@ app.get('/auth/logout', (req, res) => {
     if (err) {
       return res.status(500).json({ message: 'Error logging out' })
     }
-    res.redirect('http://localhost:5173/login');
+    res.redirect('http://localhost:5173/login')
   })
 })
 
-// Routes
 app.use('', userRouter)
-app.use('/api/user', userRouter);
 
-// Endpoint to fetch all chat messages
-app.get('/api/chatmessages', async (req, res) => {
-  try {
-    const allMessages = await ChatMessage.find().sort({ postedAt: 1 });
-    res.json(allMessages);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
+app.use('/api/user', userRouter)
 
 
-app.get('/api/get-username/:userId', async (req, res) => {
-  try {
-    const userId = req.params.userId;
-    const user = await userModel.findById(userId);
-    if (!user) {
-      return res.status(404).json({ message: 'User not found' });
-    }
-
-    res.json({ username: user.name });
-  } catch (err) {
-    console.error('Error fetching username:', err);
-    res.status(500).json({ message: 'Internal server error' });
-  }
-});
-// Connect to DB, then start server & Socket.IO
 connectDB()
   .then(() => {
-    console.log('Database connection successful');
-
-    const server = http.createServer(app);
-    const io = new Server(server, {
-      cors: {
-        origin: 'http://localhost:5173',
-        methods: ['GET', 'POST']
-      }
-    });
-
-    io.on('connection', (socket) => {
-      console.log('A new client connected:', socket.id);
-
-      socket.on('chat message', async (msg) => {
-        try {
-          const chatDoc = await ChatMessage.create(msg);
-          io.emit('chat message', chatDoc);
-        } catch (err) {
-          console.error('error saving chat message:', err);
-        }
-      });
-
-      socket.on('disconnect', () => {
-        console.log('Client disconnected:', socket.id);
-      });
-    });
-
-    server.listen(3000, () => {
-      console.log('Server is listening on port 3000');
-    });
+    console.log('Database connection successful')
+    app.listen(3000, () => {
+      console.log('Server is listening on port 3000')
+    })
   })
-  .catch((error) => {
-    console.error('Error in connecting Database:' + error);
-  });
+  .catch(error => {
+    console.error('Error in connecting Database:' + error)
+  })
+
+
+
+//To test this:
+// Create a new GitHub OAuth app at https://github.com/settings/developers
+// Set the Authorization callback URL to http://localhost:3000/auth/github/callback
+// Replace the GITHUB_CLIENT_ID and GITHUB_CLIENT_SECRET with your actual values
+// Start your server and try accessing /auth/github endpoint
+
+
