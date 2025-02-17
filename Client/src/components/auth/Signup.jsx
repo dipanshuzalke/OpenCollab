@@ -36,7 +36,7 @@ const Signup = () => {
         }
       )
       alert('Registration successful!')
-      navigate('/')
+      navigate('/home')
     } catch (error) {
       console.error('Signup failed:', error)
     }

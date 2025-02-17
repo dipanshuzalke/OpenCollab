@@ -96,4 +96,14 @@ module.exports.loginController = async function (req, res) {
   }
 }
 
+module.exports.logoutController  = async function (req, res) {
+  try {
+    localStorage.removeItem("token");
+    window.location.href = "/";
+    return res.status(200).json({ message: "User logged out successfully" });
+  } catch (error) {
+    return res.status(500).json({ error: "Logout failed" });
+  }
+}
+
 //else part is removed because !user already exist

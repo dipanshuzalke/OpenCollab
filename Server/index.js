@@ -123,7 +123,6 @@ app.get('/auth/logout', (req, res) => {
 })
 
 // Routes
-app.use('', userRouter)
 app.use('/api/user', userRouter);
 
 // Endpoint to fetch all chat messages
