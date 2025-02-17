@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -14,7 +14,7 @@ const HomePage = () => {
             <li className="hover:text-gray-400 cursor-pointer">Events</li>
             <li className="hover:text-gray-400 cursor-pointer">Ideas</li>
             <li className="hover:text-gray-400 cursor-pointer">Projects</li>
-            <li className="hover:text-gray-400 cursor-pointer">Community Chat</li>
+            <Link to='/community-chat' className="hover:text-gray-400 cursor-pointer">Community Chat</Link>
             <li className="hover:text-gray-400 cursor-pointer">Contact Us</li>
             <button 
               onClick={() => navigate('/register')}
