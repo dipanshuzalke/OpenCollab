@@ -1,4 +1,3 @@
-import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import CollaborateIcon from '../assets/undraw_collaborators_rgw4.svg'
 import PostIcon from '../assets/undraw_post_eok2.svg'
