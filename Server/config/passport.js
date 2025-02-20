@@ -1,7 +1,7 @@
 const passport = require("passport");
 const GitHubStrategy = require("passport-github2").Strategy;
 const bcrypt = require("bcrypt");
-const userModel = require("../models/user");
+const User = require("../Models/user");
 
 // GitHub credentials (move these to environment variables for production)
 const GITHUB_CLIENT_ID = "4b1018f34e5bed6d7ed1";
@@ -13,7 +13,7 @@ passport.serializeUser((user, done) => {
 
 passport.deserializeUser(async (id, done) => {
   try {
-    const user = await userModel.findById(id);
+    const user = await User.findById(id);
     done(null, user);
   } catch (err) {
     done(err, null);

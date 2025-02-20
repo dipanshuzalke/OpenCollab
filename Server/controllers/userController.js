@@ -1,11 +1,9 @@
-const userModel = require('../Models/user')
-// const { users } = require('../config/mockData') till the time database id not accessed
+const User = require('../Models/user.js')
+const Mentor = require('../Models/mentor')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const JWT_USER_PASSWORD = 'dipanshu@123'
-const User = require('../Models/user')
-const Mentor = require('../Models/mentor')
-const Professional = require('../Models/professional')
+const Professional = require('../Models/professional.js')
 
 module.exports.signupController = async function (req, res) {
   const { role } = req.params
@@ -96,13 +94,13 @@ module.exports.loginController = async function (req, res) {
   }
 }
 
-module.exports.logoutController  = async function (req, res) {
+module.exports.logoutController = async function (req, res) {
   try {
-    localStorage.removeItem("token");
-    window.location.href = "/";
-    return res.status(200).json({ message: "User logged out successfully" });
+    localStorage.removeItem('token')
+    window.location.href = '/'
+    return res.status(200).json({ message: 'User logged out successfully' })
   } catch (error) {
-    return res.status(500).json({ error: "Logout failed" });
+    return res.status(500).json({ error: 'Logout failed' })
   }
 }
 
