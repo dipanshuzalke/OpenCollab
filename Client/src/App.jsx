@@ -13,6 +13,7 @@ import LandingPage from './components/LandingPage'
 import CommunityPage from './components/Communitypage.jsx'
 import EventPage from './components/pages/EventPage.jsx'
 import AppLayout from './components/layout/AppLayout.jsx'
+import Auth from './components/auth/Auth.jsx'
 
 function App () {
   const router = createBrowserRouter([
@@ -21,24 +22,20 @@ function App () {
       element: <LandingPage />
     },
     {
+      path: 'auth',
+      element: <Auth />
+    },
+    {
+      path: 'register/:role',
+      element: <Signup />
+    },
+    {
       path: '/',
       element: <AppLayout />,
       children: [
         {
           path: 'home',
           element: <HomePage />
-        },
-        {
-          path: 'login',
-          element: <Login />
-        },
-        {
-          path: 'register',
-          element: <RoleSelection />
-        },
-        {
-          path: 'register/:role',
-          element: <Signup />
         },
         {
           path: 'logout',

@@ -90,39 +90,8 @@ const Signup = () => {
             value={formData.password}
             onChange={handleChange}
           />
-          {/* <TextField
-            margin="normal"
-            fullWidth
-            name="skills"
-            label="Skills (comma-separated)"
-            type="text"
-            id="skills"
-            value={formData.skills}
-            onChange={handleChange}
-          />
-          <TextField
-            margin="normal"
-            fullWidth
-            name="githubProfile"
-            label="GitHub Profile URL"
-            type="url"
-            id="githubProfile"
-            value={formData.githubProfile}
-            onChange={handleChange}
-          /> */}
           {role === "student" && (
             <>
-              {/* <label className="block mt-4 mb-2">Skills (comma-separated):</label>
-            <input
-              type="text"
-              name="skills"
-              className="w-full p-2 border rounded"
-              placeholder="React, Python, AI..."
-              onChange={(e) => setFormData({ ...formData, skills: e.target.value.split(",") })}
-            />
-
-            <label className="block mt-4 mb-2">GitHub Profile:</label>
-            <input type="text" name="githubProfile" className="w-full p-2 border rounded" onChange={handleChange} /> */}
               <TextField
                 margin="normal"
                 required
@@ -157,13 +126,6 @@ const Signup = () => {
           )}
           {role === "professional" && (
             <>
-              {/* <label className='block mt-4 mb-2'>Organization</label>
-              <input
-                type='text'
-                name='skills'
-                className='w-full p-2 border rounded'
-                onChange={handleChange}
-              /> */}
               <TextField
                 margin="normal"
                 required

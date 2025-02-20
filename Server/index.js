@@ -1,14 +1,12 @@
 const express = require('express');
 const session = require('express-session');
-const passport = require('passport');
 const cors = require('cors');
+const cookieParser = require('cookie-parser')
 const http = require('http');
 const { Server } = require('socket.io');
 
 const connectDB = require('./config/db');
-require('./config/passport');
 
-const { githubAuthRoutes } = require('./routes/authRoutes');
 const userRoutes = require('./routes/userRoutes.js');
 const adminRoutes = require('./routes/adminRoutes.js');
 const chatRoutes = require('./routes/chatRoutes.js');
@@ -16,25 +14,14 @@ const ChatMessage = require('./models/chatMessage.js');
 
 const app = express();
 
-// Session configuration (development only; move secrets to env variables in production)
-const SESSION_SECRET = 'your-super-secret-session-key-123';
-app.use(session({
-  secret: SESSION_SECRET,
-  resave: false,
-  saveUninitialized: false
-}));
-
-app.use(passport.initialize());
-app.use(passport.session());
-
 app.use(cors({
   origin: 'http://localhost:5173', // Vite's default port
   credentials: true
 }));
 
 app.use(express.json());
+app.use(cookieParser())
 
-app.use('/auth', githubAuthRoutes);
 app.use('/api/chatmessages', chatRoutes);
 app.use('/api/user', userRoutes);
 app.use('/api/admin', adminRoutes);

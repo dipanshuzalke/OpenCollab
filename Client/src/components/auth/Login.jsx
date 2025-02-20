@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { TextField, Button, Box, Typography, Container, Alert, Divider } from '@mui/material';
 import axios from 'axios';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import GitHubIcon from '@mui/icons-material/GitHub';
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -43,10 +42,6 @@ const Login = () => {
     } catch (error) {
       setError(error.response?.data?.message || 'Login failed. Please try again.');
     }
-  };
-
-  const handleGitHubLogin = () => {
-    window.location.href = 'http://localhost:3000/auth/github';
   };
 
   return (
@@ -99,18 +94,6 @@ const Login = () => {
             sx={{ mt: 3, mb: 2 }}
           >
             Sign In
-          </Button>
-          
-          <Divider sx={{ my: 2 }}>OR</Divider>
-          
-          <Button
-            fullWidth
-            variant="outlined"
-            startIcon={<GitHubIcon />}
-            onClick={handleGitHubLogin}
-            sx={{ mt: 1, mb: 2 }}
-          >
-            Continue with GitHub
           </Button>
         </Box>
       </Box>

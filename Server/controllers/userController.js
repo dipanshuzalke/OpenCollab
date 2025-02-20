@@ -1,8 +1,7 @@
-const User = require('../Models/user.js')
+const User = require('../Models/user')
 const Mentor = require('../Models/mentor')
-const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
-const JWT_USER_PASSWORD = 'dipanshu@123'
+// const JWT_USER_PASSWORD = 'dipanshu@123'
 const Professional = require('../Models/professional.js')
 
 module.exports.signupController = async function (req, res) {
@@ -21,10 +20,22 @@ module.exports.signupController = async function (req, res) {
         skills,
         githubProfile
       })
-      await newStudent.save()
+      const savedUser = await newStudent.save()
+      const token = await savedUser.getJWT()
+
+      res.cookie('token', token, {
+        maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days in milliseconds
+        httpOnly: true
+      })
     } else if (role === 'mentor') {
       const newMentor = new Mentor({ name, emailId, password: hashedPassword })
       await newMentor.save()
+      const token = await newMentor.getJWT()
+
+      res.cookie('token', token, {
+        maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days in milliseconds
+        httpOnly: true
+      })
     } else if (role === 'professional') {
       const newProfessional = new Professional({
         name,
@@ -33,6 +44,12 @@ module.exports.signupController = async function (req, res) {
         organization
       })
       await newProfessional.save()
+      const token = await newProfessional.getJWT()
+
+      res.cookie('token', token, {
+        maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days in milliseconds
+        httpOnly: true
+      })
     } else {
       return res.status(400).json({ message: 'Invalid role' })
     }
@@ -44,64 +61,40 @@ module.exports.signupController = async function (req, res) {
 }
 
 module.exports.loginController = async function (req, res) {
-  const { emailId, password } = req.body
+  try {
+    const { emailId, password } = req.body
 
-  const user = await userModel.findOne({
-    emailId: emailId
-  })
-
-  if (!user) {
-    return res.status(403).json({
-      message: 'User does not exist in our db'
+    const user = await User.findOne({
+      emailId: emailId
     })
-  }
 
-  // Compare password with hashed password
-  const isPasswordValid = await bcrypt.compare(password, user.password)
+    if (!user) {
+      throw new Error('Invalid credentials')
+    }
 
-  if (!isPasswordValid) {
-    return res.status(403).json({
-      message: 'Invalid credentials'
-    })
-  }
+    const isPasswordValid = await user.validatePassword(password)
 
-  const token = jwt.sign(
-    {
-      id: user._id
-    },
-    JWT_USER_PASSWORD
-  )
+    if (isPasswordValid) {
+      //Create jwt token
+      const token = await user.getJWT()
 
-  const passwordMatch = await bcrypt.compare(password, user.password)
-
-  if (passwordMatch) {
-    const token = jwt.sign(
-      {
-        id: user._id
-      },
-      JWT_USER_PASSWORD
-    )
-
-    res.json({
-      token: token,
-      message: 'You are signed in',
-      isAdmin: user.isAdmin
-    })
-  } else {
-    res.status(403).json({
-      message: 'Incorrect credentials'
-    })
+      //Add the token to the cookies and send the response back to the user
+      res.cookie('token', token, {
+        expiresIn: '7d'
+      }) // expire in 8 hour
+      res.send('Login Successful')
+    } else {
+      throw new Error('Invalid credentials')
+    }
+  } catch (error) {
+    res.status(400).send('ERROR : ' + err.message)
   }
 }
 
-module.exports.logoutController = async function (req, res) {
-  try {
-    localStorage.removeItem('token')
-    window.location.href = '/'
-    return res.status(200).json({ message: 'User logged out successfully' })
-  } catch (error) {
-    return res.status(500).json({ error: 'Logout failed' })
-  }
+module.exports.logoutController = async (req, res) => {
+  res.cookie('token', null, {
+    expires: new Date(Date.now())
+  })
 }
 
 //else part is removed because !user already exist

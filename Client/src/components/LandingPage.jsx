@@ -33,7 +33,7 @@ const LandingPage = () => {
           </a>
           {!token && (
               <button 
-              onClick={() => navigate('/register')}
+              onClick={() => navigate('/auth')}
               className="px-6 py-2 bg-[#B697E1] rounded-lg hover:bg-[#341539]"
             >
               Login
