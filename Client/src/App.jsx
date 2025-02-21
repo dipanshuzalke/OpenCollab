@@ -14,6 +14,8 @@ import CommunityPage from './components/Communitypage.jsx'
 import EventPage from './components/pages/EventPage.jsx'
 import AppLayout from './components/layout/AppLayout.jsx'
 import Auth from './components/auth/Auth.jsx'
+import FeedPage from './components/pages/FeedPage.jsx'
+import ChatPage from './components/pages/ChatPage.jsx'
 
 function App () {
   const router = createBrowserRouter([
@@ -36,6 +38,14 @@ function App () {
         {
           path: 'home',
           element: <HomePage />
+        },
+        {
+          path: 'feed',
+          element: <FeedPage />
+        },
+        {
+          path: 'chats',
+          element: <ChatPage />
         },
         {
           path: 'logout',

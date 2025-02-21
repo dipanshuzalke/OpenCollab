@@ -17,7 +17,7 @@ const Login = () => {
     const token = searchParams.get('token');
     if (token) {
       localStorage.setItem('token', token);
-      navigate('/dashboard');
+      navigate('/home');
     }
   }, [searchParams, navigate]);
 
@@ -37,7 +37,7 @@ const Login = () => {
       if (response.data.isAdmin) {
         navigate('/admin/users');
       } else {
-        navigate('/');
+        navigate('/home');
       }
     } catch (error) {
       setError(error.response?.data?.message || 'Login failed. Please try again.');
